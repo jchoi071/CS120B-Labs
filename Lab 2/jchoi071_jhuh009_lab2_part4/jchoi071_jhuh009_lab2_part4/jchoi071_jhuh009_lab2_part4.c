@@ -1,4 +1,4 @@
-/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu), Ji Hoon Choi (jchoi071@ucr.edu)
+/*	Partner(s) Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu), Ji Houn Huh (jhuh009@ucr.edu)
  *	Lab Section: 23
  *	Assignment: Lab # 2 Exercise # 4
  *	Exercise Description: Roller coaster weight detector

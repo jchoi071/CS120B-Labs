@@ -1,4 +1,4 @@
-/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu), Ji Hoon Choi (jchoi071@ucr.edu)
+/*	Partner(s) Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu), Ji Houn Huh (jhuh009@ucr.edu)
  *	Lab Section:  023
  *	Assignment: Lab #2  Exercise # 3
  *	Exercise Description: Indicate if lot is full
