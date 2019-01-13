@@ -1,7 +1,5 @@
 .atsuo
-*.atsln
 *.xml
-*.ccproj
 *.eep
 *.elf
 *.hex

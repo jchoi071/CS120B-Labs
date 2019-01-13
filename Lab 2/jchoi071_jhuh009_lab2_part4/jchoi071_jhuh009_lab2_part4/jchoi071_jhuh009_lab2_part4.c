@@ -1,7 +1,7 @@
 /*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu), Ji Hoon Choi (jchoi071@ucr.edu)
- *	Lab Section:  023
- *	Assignment: Lab #2  Exercise # 4
- *	Exercise Description: Fat Kids on a rollercoaster
+ *	Lab Section: 23
+ *	Assignment: Lab # 2 Exercise # 4
+ *	Exercise Description: Roller coaster weight detector
  *	
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
@@ -11,12 +11,13 @@
 
 int main(void)
 {
+	//turns off JTAG register - use optimize by size
     MCUCR = 0x80;
     MCUCR = 0x80;
 
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
     DDRB = 0x00; PORTB = 0xFF; // Configure port B's 8 pins as inputs
-    DDRC = 0x00; //PORTC = 0xFF; // Configure port C's 8 pins as inputs
+    DDRC = 0x00; PORTC = 0xFF; // Configure port C's 8 pins as inputs
     DDRD = 0xFF; PORTD = 0x00; // Configure port D's 8 pins as outputs, initialize to 0s
 
     unsigned char tmpA = 0x00; // Temporary variable to hold the value of A
@@ -49,7 +50,7 @@ int main(void)
             tmpD = ((tmpD & 0xFE) | 0x00);
         }
 
-        if ((tmpA - tmpC) > 80)
+        if ((tmpA - tmpC) || (tmpC - tmpA) > 80)
         {
             tmpD = (tmpD & 0xFD) | 0x02;
         }
