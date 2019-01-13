@@ -1,7 +1,7 @@
-/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu)
+/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu), Ji Hoon Choi (jchoi071@ucr.edu)
  *	Lab Section: 23
- *	Assignment: Lab # 2 Exercise # 1
- *	Exercise Description: Garage door opening circuit
+ *	Assignment: Lab # 2 Exercise # 2
+ *	Exercise Description: Parking Lot available
  *	
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
