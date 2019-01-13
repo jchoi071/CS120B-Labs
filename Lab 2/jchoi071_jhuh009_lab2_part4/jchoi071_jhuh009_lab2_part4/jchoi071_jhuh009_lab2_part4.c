@@ -9,6 +9,9 @@
 
 int main(void)
 {
+    MCUCR = 0x80;
+    MCUCR = 0x80;
+
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
     DDRB = 0x00; PORTB = 0xFF; // Configure port B's 8 pins as inputs
     DDRC = 0x00; PORTC = 0xFF; // Configure port C's 8 pins as inputs
@@ -27,27 +30,32 @@ int main(void)
         tmpA = PINA;
         tmpB = PINB;
         tmpC = PINC;
+        tmpD = 0;
         
         totalWeight = tmpA + tmpB + tmpC;
-        shiftWeight = totalWeight * 4;
+        shiftWeight = (totalWeight / 10 * 4);   //divide by 10 then shift left twice
+                                                //this allows the remaining 6 bits of PORTD to represent up to 
+                                                //630 kg (multiply value of high 6 bits in D by 10)
+                                                //drawback is the weight is approximate
 
         if (totalWeight > 140)
         {
-            tmpD = (tmpD & 0xFE) | 0x01;
+            tmpD = ((tmpD & 0xFE) | 0x01);
         }
         else
         {
-            tmpD = (tmpD & 0xFE) | 0x00;
+            tmpD = ((tmpD & 0xFE) | 0x00);
         }
 
         if ((tmpA - tmpC) > 80)
         {
-            tmpD = (tmpD & 0xFC) | 0x02;
+            tmpD = (tmpD & 0xFD) | 0x02;
         }
 
         tmpD = tmpD + shiftWeight;
         PORTD = tmpD;
         tmpD = 0;
+        totalWeight = 0;
     }
 }
 
