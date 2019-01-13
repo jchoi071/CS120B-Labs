@@ -1,9 +1,11 @@
-/*
- * jhuh009_jchoi071_lab2_part3.cpp
- *
- * Created: 1/12/2019 4:36:37 PM
- * Author : Patrick Wumbo
- */ 
+/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu), Ji Hoon Choi (jchoi071@ucr.edu)
+ *	Lab Section:  023
+ *	Assignment: Lab #2  Exercise # 3
+ *	Exercise Description: Indicate if lot is full
+ *	
+ *	I acknowledge all content contained herein, excluding template or example
+ *	code, is my own original work.
+ */
 
 #include <avr/io.h>
 

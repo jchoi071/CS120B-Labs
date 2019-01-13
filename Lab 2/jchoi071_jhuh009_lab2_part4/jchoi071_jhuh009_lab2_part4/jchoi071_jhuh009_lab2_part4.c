@@ -1,9 +1,11 @@
-/*
- * jchoi071_jhuh009_lab2_part4.c
- *
- * Created: 1/12/2019 5:36:54 PM
- * Author : Paul Choi
- */ 
+/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu), Ji Hoon Choi (jchoi071@ucr.edu)
+ *	Lab Section:  023
+ *	Assignment: Lab #2  Exercise # 4
+ *	Exercise Description: Fat Kids on a rollercoaster
+ *	
+ *	I acknowledge all content contained herein, excluding template or example
+ *	code, is my own original work.
+ */
 
 #include <avr/io.h>
 
@@ -14,7 +16,7 @@ int main(void)
 
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
     DDRB = 0x00; PORTB = 0xFF; // Configure port B's 8 pins as inputs
-    DDRC = 0x00; PORTC = 0xFF; // Configure port C's 8 pins as inputs
+    DDRC = 0x00; //PORTC = 0xFF; // Configure port C's 8 pins as inputs
     DDRD = 0xFF; PORTD = 0x00; // Configure port D's 8 pins as outputs, initialize to 0s
 
     unsigned char tmpA = 0x00; // Temporary variable to hold the value of A
