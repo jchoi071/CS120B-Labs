@@ -1,9 +1,11 @@
-/*
- * jhuh009_jchoi071_lab2_part2.cpp
- *
- * Created: 1/12/2019 4:36:37 PM
- * Author : Patrick Wumbo
- */ 
+/*	Partner(s) Name & E-mail: Ji Houn Huh (jhuh009@ucr.edu)
+ *	Lab Section: 23
+ *	Assignment: Lab # 2 Exercise # 1
+ *	Exercise Description: Garage door opening circuit
+ *	
+ *	I acknowledge all content contained herein, excluding template or example
+ *	code, is my own original work.
+ */
 
 #include <avr/io.h>
 
