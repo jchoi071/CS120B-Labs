@@ -32,7 +32,7 @@ int main(void)
     while (1) 
     {
 		tmpD = PIND;
-		tmpB = PINB;
+		tmpB = PINB & 0x01;
 		
 		weight = 0;
 		weight += tmpD;
