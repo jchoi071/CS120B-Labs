@@ -7,9 +7,12 @@
 
 #include <avr/io.h>
 
-enum IncDec_States { Start, Init, Wait, Inc, Dec, Reset } IncDec_State;
+enum IncDec_States { Start, Init, WaitRise, WaitFall, Inc, Dec, Reset } IncDec_State;
 
-void TickFct_IncDec(unsigned char tmpA, unsigned char tmpC)
+unsigned char tmpA = 0x00;
+unsigned char tmpC = 0x00;
+
+void TickFct_IncDec()
 {
     switch (IncDec_State)
     {
@@ -18,10 +21,11 @@ void TickFct_IncDec(unsigned char tmpA, unsigned char tmpC)
             break;
         
         case Init:
-            IncDec_State = Wait;
+            IncDec_State = WaitRise;
             break;
         
-        case Wait:
+        case WaitRise:
+            tmpA = PINA;
             if ((tmpA & 0x01) && (!(tmpA & 0x02)))
             {
                 IncDec_State = Inc;
@@ -30,34 +34,49 @@ void TickFct_IncDec(unsigned char tmpA, unsigned char tmpC)
             {
                 IncDec_State = Dec;
             }
-            else if (tmpA & 0x03)
+            else if ((tmpA & 0x03) == 0x03)
             {
                 IncDec_State = Reset;
             }
-            else if (!(tmpA & 0x03))
+            else if ((tmpA & 0x03) != 0x03)
             {
-                IncDec_State = Wait;
+                IncDec_State = WaitRise;
             }
             else
             {
-                IncDec_State = Wait;
+                IncDec_State = WaitRise;
             }
             break;
             
+        case WaitFall:
+            if (tmpA == PINA)
+            {
+                IncDec_State = WaitFall;
+            }
+            else if (tmpA != PINA)
+            {
+                IncDec_State = WaitRise;
+            }
+            else
+            {
+                IncDec_State = WaitRise;
+            }
+            break;
+
         case Inc:
-            IncDec_State = Wait;
+            IncDec_State = WaitFall;
             break;
         
         case Dec:
-            IncDec_State = Wait;
+            IncDec_State = WaitFall;
             break;
             
         case Reset:
-            IncDec_State = Wait;
+            IncDec_State = WaitFall;
             break;
             
         default:
-            IncDec_State = Wait;
+            IncDec_State = WaitFall;
             break;       
         
     }
@@ -71,8 +90,13 @@ void TickFct_IncDec(unsigned char tmpA, unsigned char tmpC)
             tmpC = 7;
             break;
         
-        case Wait:
+        case WaitRise:
             PORTC = tmpC;
+            break;
+
+         case WaitFall:
+            PORTC = tmpC;
+            break;
             
         case Inc:
             if (tmpC + 1 <= 9)
@@ -101,14 +125,11 @@ int main(void)
 {
     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
     DDRC = 0xFF; PORTC = 0x00; // Configure port C's 8 pins as outputs
-        
-    unsigned char tmpA = PINA;
-    unsigned char tmpC = 0x00;
-        
+       
     IncDec_State = Start;
     while (1) 
     {
-        TickFct_IncDec(tmpA, tmpC);
+        TickFct_IncDec();
     }
 }
 
