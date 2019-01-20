@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>jchoi071_jhuh009_lab4_part3</AssemblyName>
-    <Name>jchoi071_jhuh009_lab4_part3</Name>
-    <RootNamespace>jchoi071_jhuh009_lab4_part3</RootNamespace>
+    <AssemblyName>jchoi071_jhuh009_lab4_part4</AssemblyName>
+    <Name>jchoi071_jhuh009_lab4_part4</Name>
+    <RootNamespace>jchoi071_jhuh009_lab4_part4</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -134,7 +134,7 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="jchoi071_jhuh009_lab4_part3.c">
+    <Compile Include="jchoi071_jhuh009_lab4_part4.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
