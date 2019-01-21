@@ -1,7 +1,7 @@
 /*  Partner(s) Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu), Ji Houn Huh (jhuh009@ucr.edu)
  *  Lab Section: 23
- *  Assignment: Lab # 4 Exercise # 3
- *  Exercise Description: XY# Lock
+ *  Assignment: Lab # 4 Exercise # 4
+ *  Exercise Description: XY# Lock Inner Lock
  *  
  *  I acknowledge all content contained herein, excluding template or example
  *  code, is my own original work.
