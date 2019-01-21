@@ -45,9 +45,17 @@ void Tick_DoorLock()
 			
 			if((tmpC & 0x07) == 0x02 || (tmpC & 0x07) == 0x06)
 			{
-				DoorLock_State = DoorUnlock;
+                if (!tmpB)
+                {
+				    DoorLock_State = DoorUnlock;
+                }
+                else
+                {
+                    DoorLock_State = DoorLock;
+                }
 			}
-			else {
+			else
+            {
 				DoorLock_State = WaitX;
 			}
 			
