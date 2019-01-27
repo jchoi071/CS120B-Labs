@@ -1,9 +1,11 @@
-/*
- * jchoi071_jhuh009_lab5_part3.c
- *
- * Created: 1/24/2019 2:26:00 PM
- * Author : snesi
- */ 
+/*  Partner(s) Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu), Ji Houn Huh (jhuh009@ucr.edu)
+ *  Lab Section: 23
+ *  Assignment: Lab # 5 Exercise # 3
+ *  Exercise Description: Challenge, custom lights
+ *  
+ *  I acknowledge all content contained herein, excluding template or example
+ *  code, is my own original work.
+ */
 
 #include <avr/io.h>
 
