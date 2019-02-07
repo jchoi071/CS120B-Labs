@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>jchoi071_jhuh009_lab8_part_1</AssemblyName>
-    <Name>jchoi071_jhuh009_lab8_part_1</Name>
-    <RootNamespace>jchoi071_jhuh009_lab8_part_1</RootNamespace>
+    <AssemblyName>test</AssemblyName>
+    <Name>test</Name>
+    <RootNamespace>test</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
