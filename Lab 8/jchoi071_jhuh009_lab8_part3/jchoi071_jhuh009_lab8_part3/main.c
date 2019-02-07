@@ -28,16 +28,23 @@ int main(void)
 	ADC_init();
 	
     /* Replace with your application code */
-    while (1) 
+      while (1)
     {
 		//unsigned short x = ADC;  // Value of ADC register now stored in variable x
-		
-		unsigned short my_short = ADC;
-		unsigned char my_char = (char)my_short; // my_char = 0xCD
-		my_char = (char)(my_short);
-		PORTB = my_short;
-		my_char = (char)(my_short >> 8); // my_char = 0xBC
-		PORTD = my_char;
+		if(ADC >= (100 / 2)) {
+			PORTB = 0xFF;
+			PORTD = 0x03;
+		}
+		else {
+			PORTB = 0x00;
+			PORTD = 0x00;
+		}
+// 		unsigned short my_short = ADC;
+// 		unsigned char my_char = (char)my_short; // my_char = 0xCD
+// 		my_char = (char)(my_short);
+// 		PORTB = my_short;
+// 		my_char = (char)(my_short >> 8); // my_char = 0xBC
+// 		PORTD = my_char;
     }
 }
 
