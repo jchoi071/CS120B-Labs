@@ -68,15 +68,15 @@ void TickFct_Sound() {
 			buttonB = ~PINA & 0x02;
 			buttonC = ~PINA & 0x04;
 		
-			if(buttonA) {
+			if(buttonA && !buttonB && !buttonC) {
 				Sound_State = SetA;
 				break;
 			}
-			else if(buttonB) {
+			else if(buttonB && !buttonA && !buttonC) {
 				Sound_State = SetB;
 				break;
 			}
-			else if(buttonC) {
+			else if(buttonC && !buttonA && !buttonB) {
 				Sound_State = SetC;
 				break;
 			}
@@ -89,14 +89,21 @@ void TickFct_Sound() {
 		case WaitFall:
 			buttonA = ~PINA & 0x01;
 			buttonB = ~PINA & 0x02;
-			buttonC = ~PINA & 0x03;
-			if(buttonA || buttonB || buttonC) {
-				Sound_State = WaitFall;
-				break;
+			buttonC = ~PINA & 0x04;
+			if(buttonA && !buttonB && !buttonC) {
+    			Sound_State = WaitFall;
+    			break;
+			}
+			else if(buttonB && !buttonA && !buttonC) {
+    			Sound_State = WaitFall;
+    			break;
+			}
+			else if(buttonC && !buttonA && !buttonB) {
+    			Sound_State = WaitFall;
+    			break;
 			}
 			else {
 				Sound_State = WaitRise;
-				break;
 			}
 			break;
 			
@@ -123,7 +130,6 @@ void TickFct_Sound() {
 		case Init:
 			break;
 		case WaitRise:
-			break;
 			set_PWM(0);
 			//(PORTB & 0x04) = tmpC;
 			break;
