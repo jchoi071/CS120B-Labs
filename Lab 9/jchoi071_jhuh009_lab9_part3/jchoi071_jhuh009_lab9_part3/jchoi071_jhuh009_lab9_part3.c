@@ -1,9 +1,11 @@
-/*
- * jchoi071_jhuh009_lab9_part3.c
- *
- * Created: 2/10/2019 8:44:20 PM
- * Author : Paul Choi
- */ 
+/*  Partner(s) Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu), Ji Houn Huh (jhuh009@ucr.edu)
+ *  Lab Section: 23
+ *  Assignment: Lab # 9 Exercise # 3
+ *  Exercise Description: PWM play music
+ *  
+ *  I acknowledge all content contained herein, excluding template or example
+ *  code, is my own original work.
+ */
 
 #include <avr/io.h>
 #include "timer.h"
@@ -23,7 +25,7 @@ void set_PWM(double frequency) {
         // 0.954 is smallest frequency that will not result in overflow
         if (frequency < 0.954) { OCR0A = 0xFFFF; }
         
-        // prevents OCR0A from underflowing, using prescaler 64					// 31250 is largest frequency that will not result in underflow
+        // prevents OCR0A from underflowing, using prescaler 64                 // 31250 is largest frequency that will not result in underflow
         else if (frequency > 31250) { OCR0A = 0x0000; }
         
         // set OCR3A based on desired frequency
