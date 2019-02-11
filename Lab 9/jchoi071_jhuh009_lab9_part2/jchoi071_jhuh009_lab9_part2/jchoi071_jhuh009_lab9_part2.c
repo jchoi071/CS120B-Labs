@@ -229,7 +229,7 @@ int main(void)
 	DDRA = 0x00; PORTA = 0xFF;
 	DDRB = 0x08; PORTB = 0x00;
 	PWM_on();
-	set_PWM(1);
+	//set_PWM(1);
     /* Replace with your application code */
     while (1) 
     {
