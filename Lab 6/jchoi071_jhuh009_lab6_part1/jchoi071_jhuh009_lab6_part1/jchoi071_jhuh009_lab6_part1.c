@@ -23,9 +23,9 @@ void Tick() {
 	}
 	switch(state) {
 		case Start: break;
-		case S0: tmpC = 0x01; PORTC = tmpC; break;
+		case S0: tmpC = 0x09; PORTC = tmpC; break;
 		case S1: tmpC = 0x02; PORTC = tmpC; break;
-		case S2: tmpC = 0x04; PORTC = tmpC; break;
+		case S2: tmpC = 0x12; PORTC = tmpC; break;
 		default: break;
 	}
 }
