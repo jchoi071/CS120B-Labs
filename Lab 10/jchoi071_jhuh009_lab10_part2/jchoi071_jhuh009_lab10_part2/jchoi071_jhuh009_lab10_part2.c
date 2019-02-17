@@ -1,119 +1,164 @@
-/*
- * jchoi071_jhuh009_lab10_part1.c
- *
- * Created: 2/12/2019 2:45:08 PM
- * Author : Patrick Wumbo
- */ 
+/*  Partner(s) Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu), Ji Houn Huh (jhuh009@ucr.edu)
+ *  Lab Section: 23
+ *  Assignment: Lab # 10 Exercise # 2
+ *  Exercise Description: 3 sequential LEDs @ 300 ms + 1 blinking LED @ 1000 ms
+ *  
+ *  I acknowledge all content contained herein, excluding template or example
+ *  code, is my own original work.
+ */
 
 #include <avr/io.h>
 #include "timer.h"
 
-enum States { Start, S0, S1, S2} state;
-unsigned char tmpB = 0x00;
-unsigned char tmpC = 0x01;
+enum ThreeLEDStates { ThreeLEDs_Start, ThreeLEDs_S0, ThreeLEDs_S1, ThreeLEDs_S2 } ThreeLEDState;
+unsigned char threeLEDs = 0x00;
+unsigned char blinkingLED = 0x00;
+unsigned char blinkCount = 0x01;
 
-void Tick() {
-	switch(state) {
-		case Start: state = S0; break;
-		case S0: 
-			state = S1; break;
-		case S1: 
-			state = S2; break;
-		case S2: 
-			state = S0; 
-			break;
+void TickFct_ThreeLEDs()
+{
+	switch(ThreeLEDState)
+    {
+		case ThreeLEDs_Start: ThreeLEDState = ThreeLEDs_S0; break;
+		case ThreeLEDs_S0: 
+			ThreeLEDState = ThreeLEDs_S1; break;
+		case ThreeLEDs_S1: 
+			ThreeLEDState = ThreeLEDs_S2; break;
+		case ThreeLEDs_S2: 
+			ThreeLEDState = ThreeLEDs_S0; break;
 		default: 
-			state = Start; break;
+			ThreeLEDState = ThreeLEDs_Start; break;
 	}
-	switch(state) {
-		case Start: 
-			break;	
-		case S0:
-			tmpB =  0x01; 
-			if(tmpC == 1) {
-				tmpB += 0x08;
-			}
-			PORTB = tmpB; break;
-		case S1: 
-			tmpB = (0x02); 
-			if(tmpC == 1) {
-				tmpB += 0x08;
-			}
-			PORTB = tmpB; break;
-		case S2: 
-			tmpB = 0x04;
-			if(tmpC == 1) {
-				tmpB += 0x08;
-			} 
-			PORTB = tmpB; break;
+
+	switch(ThreeLEDState)
+    {
+		case ThreeLEDs_Start: 
+			break;
+				
+		case ThreeLEDs_S0:
+			threeLEDs = 0x01; 
+			break;
+		case ThreeLEDs_S1:
+			threeLEDs = 0x02; 
+			break;
+		case ThreeLEDs_S2: 
+			threeLEDs = 0x04; 
+			break;
 		default: break;
 	}
 }
-enum BlinkStates {Begin, S3} BlinkState;
-void TickFct_BlinkLed() {
-	switch(BlinkState) {
-		case Begin:
-			BlinkState = S3;
+enum BlinkLEDStates {BlinkLED_Start, BlinkLED_Blink} BlinkLEDState;
+void TickFct_BlinkLed()
+{
+	switch(BlinkLEDState)
+    {
+		case BlinkLED_Start:
+			BlinkLEDState = BlinkLED_Blink;
 			break;
-		case S3: 
+		
+		case BlinkLED_Blink:
+            BlinkLEDState = BlinkLED_Blink;
 			break;
-			
+
 		default:
-			BlinkState = Begin;
+			BlinkLEDState = BlinkLED_Start;
 			break;
 	}
-	switch(BlinkState){
-		case Begin:
+	switch(BlinkLEDState)
+    {
+		case BlinkLED_Start:
 			break;
-		case S3:
-			if(tmpC == 0x01) {
-				tmpB += 0x08;
-				PORTB = tmpB;
-				tmpC = 0x00;
-				break;
+
+		case BlinkLED_Blink:
+			if(blinkCount == 0x01)
+            {
+				blinkingLED = 0x08;
+				blinkCount = 0x00;
 			}
-			else if(tmpC == 0x00) {
-				tmpC = 0x01;
-				break;
+			else
+            {
+                blinkingLED = 0x00;
+				blinkCount = 0x01;
 			}
 			break;
-			
+
 		default:
 			break;
 	}
-	
+}
+
+enum CombineStates { CombineLED_Start, CombineLED_Combine } CombineState;
+void TickFct_CombineLEDs()
+{
+    switch (CombineState)
+    {
+        case CombineLED_Start:
+            CombineState = CombineLED_Combine;
+            break;
+
+        case CombineLED_Combine:
+            CombineState = CombineLED_Combine;
+            break;
+
+        default:
+            CombineState = CombineLED_Combine;
+            break;
+    }
+
+    switch (CombineState)
+    {
+        case CombineLED_Start:
+            break;
+
+        case CombineLED_Combine:
+            PORTB = threeLEDs + blinkingLED;
+            break;
+
+        default:
+            break;
+    }
 }
 
 int main(void)
 {
 	unsigned long BL_elapsedTime = 0;
 	unsigned long TL_elapsedTime = 0;
-	const unsigned long timerPeriod = 100;
+    unsigned long CM_elapsedTime = 0;
+	const unsigned long timerPeriod = 75;
+
 	DDRB = 0xFF;
 	PORTB = 0x00;
-	TimerSet(100);
+	TimerSet(timerPeriod);
 	TimerOn();
-	BlinkState = Begin;
-	state = Start;
+	ThreeLEDState = ThreeLEDs_Start;
+	BlinkLEDState = BlinkLED_Start;
+    CombineState = CombineLED_Start;
+
 	while (1)
 	{
-		if(BL_elapsedTime >= 1000) {
-			TickFct_BlinkLed(); // Execute one tick of the BlinkLed synchSM
+        if (TL_elapsedTime >= 300)
+        {
+            TickFct_ThreeLEDs();
+            TL_elapsedTime = 0;
+        }
+
+		if (BL_elapsedTime >= 1000)
+        {
+			TickFct_BlinkLed();
 			BL_elapsedTime = 0;
 		}
-		
-		//TimerSet(100);
-		if(TL_elapsedTime >= 300){
-			
-			Tick();
-			TL_elapsedTime = 0;
-		}
-		
-		//TickFct_BlinkLed();
+
+        if (CM_elapsedTime >= 75)
+        {
+            TickFct_CombineLEDs();
+            CM_elapsedTime = 0;
+        }
+
 		while(!TimerFlag);
 		TimerFlag = 0;
 		BL_elapsedTime += timerPeriod;
 		TL_elapsedTime += timerPeriod;
+        CM_elapsedTime += timerPeriod;
 	}
 }
 
