@@ -90,8 +90,6 @@ void TickFct_BlinkLed()
 }
 
 enum PWMStates { PWM_Start, PWM_Wait, PWM_On, PWM_Off } PWMState;
-const unsigned char PULSE = 1;
-unsigned char PWM_counter = 0;
 unsigned char pwm;
 void TickFct_PWM()
 {
@@ -116,14 +114,7 @@ void TickFct_PWM()
         case PWM_On:
             if (((tmpA & 0x04) == 0x04))
             {
-                if (PWM_counter < PULSE)
-                {
-                    PWMState = PWM_On;
-                }
-                else
-                {
-                    PWMState = PWM_Off;
-                }
+                PWMState = PWM_Off;
             }
             else
             {
@@ -132,16 +123,9 @@ void TickFct_PWM()
             break;
 
         case PWM_Off:
-            if ((tmpA & 0x04) == 0x04)
+            if ((tmpA & 0x04) == 0x04)\
             {
-                if (PWM_counter < PULSE)
-                {
-                    PWMState = PWM_Off;
-                }
-                else
-                {
-                    PWMState = PWM_On;
-                }
+                PWMState = PWM_On;
             }
             else
             {
@@ -160,32 +144,15 @@ void TickFct_PWM()
             break;
 
         case PWM_Wait:
-            PWM_counter = 0;
             pwm = 0;
             break;
 
         case PWM_On:
-            if (PWM_counter < PULSE)
-            {
-                ++PWM_counter;
-                pwm = 0x10;
-            }
-            else
-            {
-                PWM_counter = 0;
-            }
+            pwm = 0x10;
             break;
 
         case PWM_Off:
-            if (PWM_counter < PULSE)
-            {
-                ++PWM_counter;
-                pwm = 0x00;
-            }
-            else
-            {
-                PWM_counter = 0;
-            }
+            pwm = 0x00;
             break;
 
         default:
