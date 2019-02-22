@@ -63,6 +63,7 @@ void TickFct_DisplayMsg()
 			}
 			++pos;
 			LCD_DisplayString(1, buffer);
+			break;
 	}
 }
 
@@ -70,7 +71,7 @@ int main(void)
 {
 	DDRD = 0xFF; PORTD = 0x00; // LCD data lines
 	DDRA = 0xFF; PORTA = 0x00; // LCD control lines
-	TimerSet(500);
+	TimerSet(200);
 	TimerOn();
 	DisplayState = Start;
 	// Initializes the LCD display

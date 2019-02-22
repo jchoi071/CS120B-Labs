@@ -8,7 +8,8 @@ int main(void)
 	
 	// Initializes the LCD display
 	LCD_init();
-	LCD_DisplayString(1, "Woomy!");
-	
+	//LCD_Cursor(17);
+    //LCD_WriteData('W');
+	LCD_DisplayString(13, "Woomy!");
 	while(1) {continue;}
 }

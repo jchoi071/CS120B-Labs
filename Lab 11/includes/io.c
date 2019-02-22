@@ -52,6 +52,7 @@ void LCD_WriteData(unsigned char Data) {
 void LCD_DisplayString( unsigned char column, const unsigned char* string) {
    LCD_ClearScreen();
    unsigned char c = column;
+   LCD_Cursor(c);
    while(*string) {
       LCD_Cursor(c++);
       LCD_WriteData(*string++);
