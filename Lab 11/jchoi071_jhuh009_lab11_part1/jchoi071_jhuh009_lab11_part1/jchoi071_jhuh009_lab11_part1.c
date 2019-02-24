@@ -135,34 +135,33 @@ int SMTick1(int state) {
 // Implement scheduler code from PES.
 int main()
 {
-// Set Data Direction Registers
-// Buttons PORTA[0-7], set AVR PORTA to pull down logic
-DDRC = 0xF0; PORTA = 0x0F;
-DDRB = 0xFF; PORTB = 0x00;
+    // Set Data Direction Registers
+    DDRB = 0xFF; PORTB = 0x00;
+    DDRC = 0xF0; PORTC = 0x0F;
 
-//Declare an array of tasks 
-static task task1;
-task *tasks = &task1;
+    //Declare an array of tasks 
+    static task task1;
+    task *tasks = &task1;
 
 
-// Task 1
-task1.state = -1;//Task initial state.
-task1.period = 50;//Task Period.
-task1.TickFct = &SMTick1;//Function pointer for the tick.
+    // Task 1
+    task1.state = -1;//Task initial state.
+    task1.period = 50;//Task Period.
+    task1.TickFct = &SMTick1;//Function pointer for the tick.
 
-// Set the timer and turn it on
-TimerSet(50);
-TimerOn();
+    // Set the timer and turn it on
+    TimerSet(50);
+    TimerOn();
 
-unsigned short i; // Scheduler for-loop iterator
-while(1) {
-	// Scheduler code
-	for ( i = 0; i < 1; i++ ) {
-			tasks->state = tasks->TickFct(tasks->state);
-	}
-	while(!TimerFlag);
-	TimerFlag = 0;
-}
+    unsigned short i; // Scheduler for-loop iterator
+    while(1) {
+	    // Scheduler code
+	    for ( i = 0; i < 1; i++ ) {
+			    tasks->state = tasks->TickFct(tasks->state);
+	    }
+	    while(!TimerFlag);
+	    TimerFlag = 0;
+    }
 
-// Error: Program should not exit!
+    // Error: Program should not exit!
 }

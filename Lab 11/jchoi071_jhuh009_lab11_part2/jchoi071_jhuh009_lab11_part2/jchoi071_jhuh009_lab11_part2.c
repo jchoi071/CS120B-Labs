@@ -5,13 +5,12 @@
 #include "timer.h"
 
 enum DisplayStates { Start, Display } DisplayState;
-const char MSG[] = "CS120B is Legend... wait for it        DARY!";
+const char MSG[] = "CS120B is Legend... wait for it DARY!";
 //const char MSG[] = "Woomy!"; //Test message, shorter than buffer
 char buffer[] = "                ";
 unsigned char pos = 0;
 const unsigned char BUFFER_SIZE = 16;
 unsigned char msg_size = strlen(MSG);
-
 
 void TickFct_DisplayMsg()
 {
@@ -69,14 +68,14 @@ void TickFct_DisplayMsg()
 
 int main(void)
 {
-	DDRD = 0xFF; PORTD = 0x00; // LCD data lines
 	DDRA = 0xFF; PORTA = 0x00; // LCD control lines
+    DDRD = 0xFF; PORTD = 0x00; // LCD data lines
 	TimerSet(200);
 	TimerOn();
 	DisplayState = Start;
 	// Initializes the LCD display
 	LCD_init();
-	
+	LCD_ClearScreen();
 	while(1)
 	{
 		TickFct_DisplayMsg();
