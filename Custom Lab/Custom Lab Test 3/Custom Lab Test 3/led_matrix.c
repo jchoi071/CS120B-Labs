@@ -18,20 +18,26 @@ unsigned char GetBit(unsigned char x, unsigned char k)
 	return ((x & (0x01 << k)) != 0);
 }
 
-void LED_ClearScreen(void)
-{
-	uint8_t i = 0;
-	for(i = 0; i < 8; i++)
-	{
-		max7219_digit(0, i, 0);
-	}		
-}
 
-void LED_Pixel(unsigned char x, unsigned char y, unsigned char value)
+void LED_Pixel(unsigned char x, unsigned char y, unsigned char value, unsigned char intensity)
 {
 	if ((value == 0) || (value == 1))
 	{
+        max7219_intensity(0, intensity);
 		screen[7 - x] = SetBit(screen[7 - x], 7 - y, value);
 		max7219_digit(0, 7 - x, screen[7 - x]);
 	}
+}
+
+void LED_ClearScreen(unsigned char intensity)
+{
+    uint8_t i = 0;
+    uint8_t j = 0;
+    for(i = 0; i < 8; ++i)
+    {
+        for (j = 0; j < 8; ++j)
+        {
+            LED_Pixel(i, j, 0, intensity);
+        }
+    }
 }

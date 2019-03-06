@@ -10,7 +10,7 @@
 
 unsigned char SetBit(unsigned char x, unsigned char k, unsigned char b);
 unsigned char GetBit(unsigned char x, unsigned char k);
-void LED_ClearScreen(void);
-void LED_Pixel(unsigned char x, unsigned char y, unsigned char value);
+void LED_ClearScreen(unsigned char intensity);
+void LED_Pixel(unsigned char x, unsigned char y, unsigned char value, unsigned char intensity);
 
 #endif
