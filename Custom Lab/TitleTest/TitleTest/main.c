@@ -70,8 +70,8 @@ void TickFct_DisplayMsg()
 
 int main(void)
 {
-    DDRD = 0xFF; PORTD = 0x00; // LCD data lines
-    DDRA = 0xFF; PORTA = 0x00; // LCD control lines
+    DDRC = 0xFF; PORTC = 0x00; // LCD data lines
+    DDRD = 0xFF; PORTD = 0x00; // LCD control lines
     TimerSet(100);
     TimerOn();
     DisplayState = Start;

@@ -24,8 +24,8 @@ void LED_Pixel(unsigned char x, unsigned char y, unsigned char value, unsigned c
 	if ((value == 0) || (value == 1))
 	{
         max7219_intensity(0, intensity);
-		screen[7 - x] = SetBit(screen[7 - x], 7 - y, value);
-		max7219_digit(0, 7 - x, screen[7 - x]);
+		screen[y] = SetBit(screen[y], 7 - x, value);
+		max7219_digit(0, y, screen[y]);
 	}
 }
 
