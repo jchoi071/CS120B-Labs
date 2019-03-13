@@ -122,7 +122,7 @@ void initTetris()
 }
 
 unsigned char lines[8][8];
-unsigned char lines = 0, score = 0;
+unsigned char numLines = 0, score = 0;
 void displayTetromino(Tetromino tetromino, signed char x_offset, unsigned char y_offset, unsigned char rotation, unsigned char intensity)
 {
     LED_Pixel(tetromino.rotations[rotation][0].x + x_offset, tetromino.rotations[rotation][0].y + y_offset, 1, intensity);
@@ -158,18 +158,6 @@ unsigned char collision(Tetromino tetromino, unsigned char lines[8][8], signed c
         }
     }
     return returnValue;
-}
-
-void shiftDown(unsigned char lines[8][8], unsigned char removeLine)
-{
-    unsigned char a, b;
-    for (b = removeLine, b >= 0, --a)
-    {
-        for (a = 0, a < 8, ++a)
-        {
-            lines[a][b] = lines[a][b - 1]; 
-        }
-    }
 }
 
 enum Transform_States { Transform_Start, Transform_Init, Transform } Transform_State;
@@ -320,7 +308,7 @@ void TickFct_Tetris()
             break;
 
         case Tetris_Drop:
-            if (loop_time < 50)
+            if (loop_time < 25)
             {
                 ++loop_time;
             }
@@ -350,11 +338,12 @@ void TickFct_Tetris()
         case Tetris_Score:
             down = 0;
             unsigned char numOnes = 0;
-            unsigned char a, b;
+            unsigned char l = 0;
+            unsigned char a, b, c;
             unsigned char fullLine[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-            for (b = 0, b < 8, ++b)
+            for (b = 0; b < 8; ++b)
             {
-                for (a = 0, a < 8, ++a)
+                for (a = 0; a < 8; ++a)
                 {
                     if (lines[a][b])
                     {
@@ -363,20 +352,45 @@ void TickFct_Tetris()
                 }
                 if (numOnes == 8)
                 {
-                    ++lines;
+                    ++l;
                     fullLine[b] = 1;
                 }
                 numOnes = 0;
             }
 
-            for (b = 0, b < 8, ++b)
+            unsigned char m, n;
+            for (c = 0; c < 8; ++c)
             {
-                if (fullLine[b])
+                if (fullLine[c])
                 {
-
+                    for (n = c; n > 0; --n)
+                    {
+                        for (m = 0; m < 8; ++m)
+                        {
+                            lines[m][n] = lines[m][n - 1];
+                        }
+                    }
                 }
             }
 
+            if (l == 1)
+            {
+                score += 40;
+            }
+            else if (l == 2)
+            {
+                score += 100;
+            }
+            else if (l == 3)
+            {
+                score += 300;
+            }
+            else if (l >= 4)
+            {
+                score += 1200;
+            }
+
+            numLines += l;
             break;
 
         case Tetris_End:
@@ -414,7 +428,7 @@ void TickFct_Tetris_Display()
 
     case Tetris_Display:
         displayTetromino(tetris.tetrominoes[currentTet], move_x, move_y, counter, 15);
-        displayLines(lines, 5);
+        displayLines(lines, 15);
         break;
 
     default:
@@ -423,10 +437,13 @@ void TickFct_Tetris_Display()
 }
 
 enum Display_States { Disp_Start, Disp_Init, Display } Display_State;
-const char MSG[] = "Lines:          Score:";
+const unsigned char MSG[] = "Lines:          Score:          ";
 
 void TickFct_DisplayMsg()
 {
+    char* lines_string = "        ";
+    char* score_string = "        ";;
+
     switch (Display_State)
     {
         case Disp_Start:
@@ -456,7 +473,11 @@ void TickFct_DisplayMsg()
             break;
 
         case Display:
-            
+            sprintf(lines_string, "%8d", numLines);
+            LCD_DisplayString(9, lines_string);
+
+            sprintf(score_string, "%8d", score);
+            LCD_DisplayString(25, score_string);
             break;
     }
 }
