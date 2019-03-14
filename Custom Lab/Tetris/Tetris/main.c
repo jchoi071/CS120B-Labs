@@ -1,9 +1,11 @@
-/*
- * Custom Lab Test 3.c
- *
- * Created: 3/5/2019 2:32:50 PM
- * Author : snesi
- */ 
+/*  Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu)
+ *  Lab Section: 23
+ *  Assignment: Custom Lab Project
+ *  Exercise Description: Tetris with unconventional input/output devices
+ *  
+ *  I acknowledge all content contained herein, excluding template or example
+ *  code, is my own original work.
+ */
 
 #include <avr/io.h>
 #include <stdio.h>
@@ -52,19 +54,19 @@ typedef struct Tetris
 // -----------------------------------------------------------------------------
 
 unsigned char lines[8][8];
-unsigned char numLines = 0, score = 0;
+unsigned long numLines = 0, score = 0;
 unsigned char intersect = 0;
 unsigned char counter = 0;
 unsigned char currentTet = 0, nextTet = 0;
 signed char move_x = 3;
 unsigned char move_y = 0;
 unsigned char reset = 0;
+struct Tetris tetris;
 
 // -----------------------------------------------------------------------------
 // Global Functions
 // -----------------------------------------------------------------------------
 
-struct Tetris tetris;
 void initTetris()
 {
     // --------------------------------------------------------------------------------
@@ -672,13 +674,14 @@ void TickFct_Transform()
 
         case Transform_Init:
             initTetris();
-            analog_rot = ((ADC - 28) / 267);
+            analog_rot = ((ADC - 30) / 267);
+            if (analog_rot < 0) analog_rot = 0;
             counter = analog_rot;
             break;
 
         case Transform:
 
-            analog_rot = ((ADC - 28) / 267);
+            analog_rot = ((ADC - 30) / 267);
             if (analog_rot < 0) analog_rot = 0;
             if (analog_rot > 3) analog_rot = 3;
 
@@ -1156,7 +1159,6 @@ int main(void)
     max7219_intensity(ic, 15); //intensity
     max7219_scanlimit(ic, 7); //set number of digit to drive
 	LED_ClearScreen(15);
-    srand(ADC);
     ADC_init();
 
     unsigned long Tetris_elapsedTime = 20;
@@ -1174,6 +1176,8 @@ int main(void)
 	TimerOn();
 	
 	LCD_init();
+    srand(ADC);
+    srand(rand());
 
     while (1) 
     {
