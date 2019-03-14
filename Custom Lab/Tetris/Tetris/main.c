@@ -610,6 +610,7 @@ ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE);
 // -----------------------------------------------------------------------------
 
 enum Transform_States { Transform_Start, Transform_Init, Transform, Transform_End } Transform_State;
+volatile unsigned char analog_rot = 0;
 
 void TickFct_Transform()
 {
@@ -671,28 +672,22 @@ void TickFct_Transform()
 
         case Transform_Init:
             initTetris();
+            analog_rot = ((ADC - 28) / 267);
+            counter = analog_rot;
             break;
 
         case Transform:
-			if ((~PINB & 0x10) == 0x10)
-			{
-				if (counter < 3)
-				{
-                    if ((tetris.tetrominoes[currentTet].left[counter + 1] + move_x >= 0) && (tetris.tetrominoes[currentTet].right[counter + 1] + move_x <= 7) && (tetris.tetrominoes[currentTet].lowest[counter + 1] + move_y <= 7) && (!collision(tetris.tetrominoes[currentTet], lines, move_x, move_y, counter + 1)))
-                    {
-					    ++counter;
-                        LED_ClearScreen(0);
-                    }
-				}
-				else
-				{
-                    if ((tetris.tetrominoes[currentTet].left[0] + move_x >= 0) && (tetris.tetrominoes[currentTet].right[0] + move_x <= 7) && (tetris.tetrominoes[currentTet].lowest[counter + 1] + move_y <= 7) && (!collision(tetris.tetrominoes[currentTet], lines, move_x, move_y, counter + 1)))
-                    {
-					    counter = 0;
-                        LED_ClearScreen(0);
-                    }
-				}
-			}
+
+            analog_rot = ((ADC - 28) / 267);
+            if (analog_rot < 0) analog_rot = 0;
+            if (analog_rot > 3) analog_rot = 3;
+
+            if ((counter >= 3) || (((tetris.tetrominoes[currentTet].left[counter + 1] + move_x >= 0) && (tetris.tetrominoes[currentTet].right[counter + 1] + move_x <= 7) && (tetris.tetrominoes[currentTet].lowest[counter + 1] + move_y <= 7) && (!collision(tetris.tetrominoes[currentTet], lines, move_x, move_y, counter + 1))) && counter < 3))
+            {
+                counter = analog_rot;
+                LED_ClearScreen(0);
+            }
+
 			
 			if ((~PINB & 0x20) == 0x20)
 			{
@@ -837,7 +832,7 @@ void TickFct_Tetris()
             break;
 
         case Tetris_Drop:
-            if (loop_time < 30)
+            if (loop_time < 50)
             {
                 ++loop_time;
             }
@@ -1161,7 +1156,7 @@ int main(void)
     max7219_intensity(ic, 15); //intensity
     max7219_scanlimit(ic, 7); //set number of digit to drive
 	LED_ClearScreen(15);
-    srand(rand());
+    srand(ADC);
     ADC_init();
 
     unsigned long Tetris_elapsedTime = 20;
