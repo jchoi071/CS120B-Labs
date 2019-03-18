@@ -1,9 +1,11 @@
-/*
- * CFile1.c
- *
- * Created: 3/5/2019 2:34:02 PM
- *  Author: snesi
- */ 
+/*  Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu)
+ *  Lab Section: 23
+ *  Assignment: Custom Lab Project: Tetris
+ *  File Description: Original code containing functions using Davide Gironi’s max7219.c and .h files to interface with the MAX7219 chip
+ *  
+ *  I acknowledge all content contained herein, excluding template or example
+ *  code, is my own original work.
+ */
 
 #include "max7219.h"
 

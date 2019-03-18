@@ -1,3 +1,5 @@
+// UCR provided LCD driver code, modified to remove enforced LCD screen clear upon displaying a string
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdio.h>

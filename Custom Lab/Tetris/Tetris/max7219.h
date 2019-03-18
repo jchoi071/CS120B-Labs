@@ -7,6 +7,7 @@ Released under GPLv3.
 Please refer to LICENSE file for licensing information.
 */
 
+// https://davidegironi.blogspot.com/2013/07/avr-atmega-max7219-7-segment-led-matrix.html
 
 #ifndef MAX7219_H_
 #define MAX7219_H_

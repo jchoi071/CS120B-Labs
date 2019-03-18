@@ -1,9 +1,11 @@
-/*
- * led_matrix.h
- *
- * Created: 3/5/2019 2:34:22 PM
- *  Author: snesi
- */ 
+/*  Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu)
+ *  Lab Section: 23
+ *  Assignment: Custom Lab Project: Tetris
+ *  File Description: Original header file for led_matrix.c
+ *  
+ *  I acknowledge all content contained herein, excluding template or example
+ *  code, is my own original work.
+ */
 
 #ifndef LED_MATRIX_H
 #define LED_MATRIX_H

@@ -1,7 +1,7 @@
 /*  Name & E-mail: Ji Hoon Choi (jchoi071@ucr.edu)
  *  Lab Section: 23
- *  Assignment: Custom Lab Project
- *  Exercise Description: Tetris with unconventional input/output devices
+ *  Assignment: Custom Lab Project: Tetris
+ *  File description: Original code (containing some UCR-provided functions) for the state machines and main game code
  *  
  *  I acknowledge all content contained herein, excluding template or example
  *  code, is my own original work.
@@ -597,6 +597,7 @@ unsigned char collision(Tetromino tetromino, unsigned char lines[8][8], signed c
     return returnValue;
 }
 
+// UCR-provided code for microcontroller ADC
 void ADC_init()
 {
 ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE);
