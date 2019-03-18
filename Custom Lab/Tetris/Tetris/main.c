@@ -674,7 +674,7 @@ void TickFct_Transform()
 
         case Transform_Init:
             initTetris();
-            analog_rot = ((ADC - 30) / 267);
+            analog_rot = ((ADC - 32) / 267);
             if (analog_rot < 0) analog_rot = 0;
             counter = analog_rot;
             break;
