@@ -13,22 +13,22 @@ unsigned char screen[8];
 
 unsigned char SetBit(unsigned char x, unsigned char k, unsigned char b)
 {
-	return (b ? x | (0x01 << k) : x & ~(0x01 << k));
+    return (b ? x | (0x01 << k) : x & ~(0x01 << k));
 }
 unsigned char GetBit(unsigned char x, unsigned char k)
 {
-	return ((x & (0x01 << k)) != 0);
+    return ((x & (0x01 << k)) != 0);
 }
 
 
 void LED_Pixel(unsigned char x, unsigned char y, unsigned char value, unsigned char intensity)
 {
-	if ((value == 0) || (value == 1))
-	{
+    if ((value == 0) || (value == 1))
+    {
         max7219_intensity(0, intensity);
-		screen[y] = SetBit(screen[y], 7 - x, value);
-		max7219_digit(0, y, screen[y]);
-	}
+        screen[y] = SetBit(screen[y], 7 - x, value);
+        max7219_digit(0, y, screen[y]);
+    }
 }
 
 void LED_ClearScreen(unsigned char intensity)

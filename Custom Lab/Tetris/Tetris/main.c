@@ -85,57 +85,57 @@ void initTetris()
     tetris.tetrominoes[0].rotations[0][3].x = 2;
     tetris.tetrominoes[0].rotations[0][3].y = 1;
 
-	tetris.tetrominoes[0].rotations[1][0].x = 1;
-	tetris.tetrominoes[0].rotations[1][0].y = 0;
+    tetris.tetrominoes[0].rotations[1][0].x = 1;
+    tetris.tetrominoes[0].rotations[1][0].y = 0;
 
-	tetris.tetrominoes[0].rotations[1][1].x = 1;
-	tetris.tetrominoes[0].rotations[1][1].y = 1;
+    tetris.tetrominoes[0].rotations[1][1].x = 1;
+    tetris.tetrominoes[0].rotations[1][1].y = 1;
 
-	tetris.tetrominoes[0].rotations[1][2].x = 2;
-	tetris.tetrominoes[0].rotations[1][2].y = 1;
+    tetris.tetrominoes[0].rotations[1][2].x = 2;
+    tetris.tetrominoes[0].rotations[1][2].y = 1;
 
-	tetris.tetrominoes[0].rotations[1][3].x = 1;
-	tetris.tetrominoes[0].rotations[1][3].y = 2;
-	
-	tetris.tetrominoes[0].rotations[2][0].x = 0;
-	tetris.tetrominoes[0].rotations[2][0].y = 1;
+    tetris.tetrominoes[0].rotations[1][3].x = 1;
+    tetris.tetrominoes[0].rotations[1][3].y = 2;
+    
+    tetris.tetrominoes[0].rotations[2][0].x = 0;
+    tetris.tetrominoes[0].rotations[2][0].y = 1;
 
-	tetris.tetrominoes[0].rotations[2][1].x = 1;
-	tetris.tetrominoes[0].rotations[2][1].y = 1;
+    tetris.tetrominoes[0].rotations[2][1].x = 1;
+    tetris.tetrominoes[0].rotations[2][1].y = 1;
 
-	tetris.tetrominoes[0].rotations[2][2].x = 2;
-	tetris.tetrominoes[0].rotations[2][2].y = 1;
+    tetris.tetrominoes[0].rotations[2][2].x = 2;
+    tetris.tetrominoes[0].rotations[2][2].y = 1;
 
-	tetris.tetrominoes[0].rotations[2][3].x = 1;
-	tetris.tetrominoes[0].rotations[2][3].y = 2;
-	
-	tetris.tetrominoes[0].rotations[3][0].x = 1;
-	tetris.tetrominoes[0].rotations[3][0].y = 0;
+    tetris.tetrominoes[0].rotations[2][3].x = 1;
+    tetris.tetrominoes[0].rotations[2][3].y = 2;
+    
+    tetris.tetrominoes[0].rotations[3][0].x = 1;
+    tetris.tetrominoes[0].rotations[3][0].y = 0;
 
-	tetris.tetrominoes[0].rotations[3][1].x = 0;
-	tetris.tetrominoes[0].rotations[3][1].y = 1;
+    tetris.tetrominoes[0].rotations[3][1].x = 0;
+    tetris.tetrominoes[0].rotations[3][1].y = 1;
 
-	tetris.tetrominoes[0].rotations[3][2].x = 1;
-	tetris.tetrominoes[0].rotations[3][2].y = 1;
+    tetris.tetrominoes[0].rotations[3][2].x = 1;
+    tetris.tetrominoes[0].rotations[3][2].y = 1;
 
-	tetris.tetrominoes[0].rotations[3][3].x = 1;
-	tetris.tetrominoes[0].rotations[3][3].y = 2;
+    tetris.tetrominoes[0].rotations[3][3].x = 1;
+    tetris.tetrominoes[0].rotations[3][3].y = 2;
 
     tetris.tetrominoes[0].lowest[0] = 1;
-	tetris.tetrominoes[0].left[0] = 0;
+    tetris.tetrominoes[0].left[0] = 0;
     tetris.tetrominoes[0].right[0] = 2;
-	
-	tetris.tetrominoes[0].lowest[1] = 2;
-	tetris.tetrominoes[0].left[1] = 1;
-	tetris.tetrominoes[0].right[1] = 2;
-	
-	tetris.tetrominoes[0].lowest[2] = 2;
-	tetris.tetrominoes[0].left[2] = 0;
-	tetris.tetrominoes[0].right[2] = 2;
-	
-	tetris.tetrominoes[0].lowest[3] = 2;
-	tetris.tetrominoes[0].left[3] = 0;
-	tetris.tetrominoes[0].right[3] = 1;
+    
+    tetris.tetrominoes[0].lowest[1] = 2;
+    tetris.tetrominoes[0].left[1] = 1;
+    tetris.tetrominoes[0].right[1] = 2;
+    
+    tetris.tetrominoes[0].lowest[2] = 2;
+    tetris.tetrominoes[0].left[2] = 0;
+    tetris.tetrominoes[0].right[2] = 2;
+    
+    tetris.tetrominoes[0].lowest[3] = 2;
+    tetris.tetrominoes[0].left[3] = 0;
+    tetris.tetrominoes[0].right[3] = 1;
 
     tetris.tetrominoes[0].digit = 0x72;
 
@@ -692,25 +692,25 @@ void TickFct_Transform()
                 LED_ClearScreen(0);
             }
 
-			
-			if ((~PINB & 0x20) == 0x20)
-			{
-				if ((tetris.tetrominoes[currentTet].left[counter] + move_x - 1 >= 0) && (!collision(tetris.tetrominoes[currentTet], lines, move_x - 1, move_y, counter)))
-				{
-					--move_x;
+            
+            if ((~PINB & 0x20) == 0x20)
+            {
+                if ((tetris.tetrominoes[currentTet].left[counter] + move_x - 1 >= 0) && (!collision(tetris.tetrominoes[currentTet], lines, move_x - 1, move_y, counter)))
+                {
+                    --move_x;
                     LED_ClearScreen(0);
-				}
-			}
-			
-			if ((~PINB & 0x40) == 0x40)
-			{
-				if ((tetris.tetrominoes[currentTet].right[counter] + move_x + 1 <= 7) && (!collision(tetris.tetrominoes[currentTet], lines, move_x + 1, move_y, counter)))
-				{
-					++move_x;
+                }
+            }
+            
+            if ((~PINB & 0x40) == 0x40)
+            {
+                if ((tetris.tetrominoes[currentTet].right[counter] + move_x + 1 <= 7) && (!collision(tetris.tetrominoes[currentTet], lines, move_x + 1, move_y, counter)))
+                {
+                    ++move_x;
                     LED_ClearScreen(0);
-				}
-			}
-			break;
+                }
+            }
+            break;
 
         case Transform_End:
             break;
@@ -1053,8 +1053,8 @@ void TickFct_DisplayMsg()
     switch (Display_State)
     {
         case Disp_Start:
-			Display_State = Disp_Init;
-			break;
+            Display_State = Disp_Init;
+            break;
         
         case Disp_Init:
             if ((~PINB & 0x01) == 0x00)
@@ -1072,7 +1072,7 @@ void TickFct_DisplayMsg()
             {
                 if (!intersect)
                 {
-			        Display_State = Display;
+                    Display_State = Display;
                 }
                 else
                 {
@@ -1083,7 +1083,7 @@ void TickFct_DisplayMsg()
             {
                 Display_State = Disp_Init;
             }
-			break;
+            break;
         
         case GameOver:
             if ((~PINB & 0x01) == 0x00)
@@ -1097,14 +1097,14 @@ void TickFct_DisplayMsg()
             break;
 
         default:
-			Display_State = Disp_Init;
-			break;
+            Display_State = Disp_Init;
+            break;
     }
     
     switch (Display_State)
     {
         case Disp_Start:
-			break;
+            break;
         
         case Disp_Init:
             LCD_ClearScreen();
@@ -1144,10 +1144,10 @@ void TickFct_DisplayMsg()
 int main(void)
 {
     DDRA = 0xFC; PORTA = 0x03;
-	DDRB = 0x08; PORTB = 0xF7;
-	DDRC = 0xFF; PORTC = 0x00; // LCD data lines
+    DDRB = 0x08; PORTB = 0xF7;
+    DDRC = 0xFF; PORTC = 0x00; // LCD data lines
     DDRD = 0xFF; PORTD = 0x00; // LCD control lines
-	
+    
     max7219_init();
 
     uint8_t ic = 0;
@@ -1159,7 +1159,7 @@ int main(void)
     max7219_decode(ic, 0); //use led matrix
     max7219_intensity(ic, 15); //intensity
     max7219_scanlimit(ic, 7); //set number of digit to drive
-	LED_ClearScreen(15);
+    LED_ClearScreen(15);
     ADC_init();
 
     unsigned long Tetris_elapsedTime = 20;
@@ -1171,12 +1171,12 @@ int main(void)
     Tetris_State = Tetris_Start;
     Transform_State = Transform_Start;
     Tetris_Display_State = Tetris_Display_Start;
-	Display_State = Disp_Start;
-	
-	TimerSet(timerPeriod);
-	TimerOn();
-	
-	LCD_init();
+    Display_State = Disp_Start;
+    
+    TimerSet(timerPeriod);
+    TimerOn();
+    
+    LCD_init();
     srand(ADC);
     srand(rand());
 
@@ -1199,7 +1199,7 @@ int main(void)
             TickFct_Tetris_Display();
             TD_elapsedTime = 0;
         }
-		
+        
         if (Display_elapsedTime >= 50)
         {
             TickFct_DisplayMsg();
